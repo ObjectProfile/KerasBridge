@@ -14,3 +14,13 @@ KSequentialModelTests >> testEmptyModel [
 		assert: KCF send waitForValue
 		equals: 0
 ]
+
+{ #category : #tests }
+KSequentialModelTests >> testInputLayer [
+	| model |
+	model := KSequentialModel inputs: 10.
+	KCF << (#len asP3GI callWith: (Array with: model pythonVariable => #_layers)).
+	self
+		assert: KCF send waitForValue
+		equals: 1
+]
