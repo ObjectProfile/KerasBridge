@@ -1,0 +1,23 @@
+language: smalltalk
+
+python:
+  - '3.6'
+env:
+  global:
+    - PIPENV_VENV_IN_PROJECT=1
+install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then pip install pipenv; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo pip install pipenv; fi
+  - ls
+  - pwd
+  - 'pipenv install'
+  
+os:
+  - osx
+  - linux
+
+smalltalk:
+  - Pharo-6.1
+  - Pharo64-6.1
+  - Pharo-7.0
+  - Pharo64-7.0
