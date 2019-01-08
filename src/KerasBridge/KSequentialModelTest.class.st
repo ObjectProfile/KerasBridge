@@ -1,11 +1,11 @@
 Class {
-	#name : #KSequentialModelTests,
+	#name : #KSequentialModelTest,
 	#superclass : #KTestCase,
 	#category : #'KerasBridge-Tests'
 }
 
 { #category : #tests }
-KSequentialModelTests >> testEmptyModel [
+KSequentialModelTest >> testEmptyModel [
 	| model |
 	model := KSequentialModel new.
 	model createObject.
@@ -16,7 +16,7 @@ KSequentialModelTests >> testEmptyModel [
 ]
 
 { #category : #tests }
-KSequentialModelTests >> testInputLayer [
+KSequentialModelTest >> testInputLayer [
 	| model |
 	model := KSequentialModel inputs: 10.
 	KCF << (#len asP3GI callWith: (Array with: model pythonVariable => #_layers)).

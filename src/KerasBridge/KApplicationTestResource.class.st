@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #initialization }
-KApplicationTestResource >> application [
+KApplicationTestResource >> applicationClass [
 	^ Keras
+]
+
+{ #category : #initialization }
+KApplicationTestResource >> setUp [
+	super setUp.
+	application := self applicationClass new.
+	self application start
 ]

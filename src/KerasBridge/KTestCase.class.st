@@ -1,10 +1,10 @@
 Class {
 	#name : #KTestCase,
-	#superclass : #TestCase,
+	#superclass : #PBTestCase,
 	#category : #'KerasBridge-Tests'
 }
 
 { #category : #accessing }
-KTestCase class >> resources [
-	^ Array with: KApplicationTestResource
+KTestCase class >> appResource [
+	^ KApplicationTestResource
 ]
