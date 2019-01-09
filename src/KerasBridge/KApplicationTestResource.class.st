@@ -11,7 +11,12 @@ KApplicationTestResource >> applicationClass [
 
 { #category : #initialization }
 KApplicationTestResource >> setUp [
-	super setUp.
-	application := self applicationClass new.
-	self application start
+	self applicationClass stop.
+	self applicationClass start.
+	application := self applicationClass uniqueInstance
+]
+
+{ #category : #initialization }
+KApplicationTestResource >> tearDown [
+	self applicationClass stop.
 ]

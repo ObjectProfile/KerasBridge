@@ -8,3 +8,8 @@ Class {
 KTestCase class >> appResource [
 	^ KApplicationTestResource
 ]
+
+{ #category : #running }
+KTestCase >> setUp [
+	KCF reset
+]
