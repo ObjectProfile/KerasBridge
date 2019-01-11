@@ -23,7 +23,7 @@ KInputLayer class >> numberOfInputs: aNumberOfInputs [
 KInputLayer >> createObject [
 	self 
 		basicCreateObjectArgs: #() 
-		nameArgs: { #input_shape -> (PBTuple withAll: self inputShape) } asDictionary
+		nameArgs: (Array with: #input_shape -> (PBTuple withAll: self inputShape) ) asDictionary
 ]
 
 { #category : #accessing }
