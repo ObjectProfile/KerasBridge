@@ -36,7 +36,7 @@ KLayersTest >> testDenseLayerWithActivation [
 	self
 		assert: KCF send waitForValue
 		equals: 10.
-	KCF << ((layer pythonVariable => #activation) => #__name__).
+	KCF << ((layer => #activation) => #__name__).
 	self
 		assert: KCF send waitForValue
 		equals: 'tanh'.

@@ -1,10 +1,10 @@
 Class {
-	#name : #KTanh,
+	#name : #KSoftmax,
 	#superclass : #KActivation,
 	#category : #'KerasBridge-Activations'
 }
 
 { #category : #testing }
-KTanh class >> pythonClass [
-	^ 'keras' asP3GI => #activations => #tanh
+KSoftmax class >> pythonClass [
+	^ 'keras' asP3GI => #activations => #softmax
 ]
