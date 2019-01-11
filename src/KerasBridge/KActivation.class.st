@@ -1,17 +1,12 @@
 Class {
 	#name : #KActivation,
 	#superclass : #KObject,
-	#classTraits : 'P3GAttributeAccess + P3GCallable',
+	#classTraits : 'PBPythonValueTrait + P3GCallable',
 	#category : #'KerasBridge-Activations'
 }
 
 { #category : #testing }
 KActivation class >> isPythonGenerable [
-	^ true
-]
-
-{ #category : #testing }
-KActivation class >> isPythonValue [
 	^ true
 ]
 
