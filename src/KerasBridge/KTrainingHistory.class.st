@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'epochMetrics'
+		'epochsMetrics'
 	],
 	#category : #'KerasBridge-Utils'
 }
@@ -18,7 +18,7 @@ KTrainingHistory class >> model: aModel history: rawHistory [
 		dict 
 			at: (self resolveMetric: assoc key forModel: aModel )
 			put: assoc value ].
-	history epochMetrics: dict.
+	history epochsMetrics: dict.
 	^ history
 ]
 
@@ -31,18 +31,18 @@ KTrainingHistory class >> resolveMetric: aMetricName forModel: aModel [
 ]
 
 { #category : #accessing }
-KTrainingHistory >> epochMetrics [
-	^ epochMetrics
+KTrainingHistory >> epochsMetrics [
+	^ epochsMetrics
 ]
 
 { #category : #accessing }
-KTrainingHistory >> epochMetrics: anObject [
-	epochMetrics := anObject
+KTrainingHistory >> epochsMetrics: anObject [
+	epochsMetrics := anObject
 ]
 
 { #category : #'as yet unclassified' }
 KTrainingHistory >> forMetric: aMetric [
-	^ epochMetrics at: aMetric
+	^ epochsMetrics at: aMetric
 ]
 
 { #category : #'as yet unclassified' }
