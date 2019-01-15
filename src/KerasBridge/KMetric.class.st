@@ -7,7 +7,12 @@ Class {
 
 { #category : #testing }
 KMetric class >> pythonClass [
-	self subclassResponsibility
+	^ self subclassResponsibility
+]
+
+{ #category : #testing }
+KMetric class >> pythonClassName [
+	^ self pythonClass attributeIdentifier name
 ]
 
 { #category : #testing }

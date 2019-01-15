@@ -8,3 +8,8 @@ Class {
 KCategoricalAccuracy class >> pythonClass [
 	^ #keras asP3GI => #metrics => #categorical_accuracy
 ]
+
+{ #category : #testing }
+KCategoricalAccuracy class >> pythonClassName [
+	^ #binary_accuracy
+]

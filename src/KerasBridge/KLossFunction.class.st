@@ -16,6 +16,11 @@ KLossFunction class >> pythonClass [
 ]
 
 { #category : #testing }
+KLossFunction class >> pythonClassName [
+	^ self pythonClass attributeIdentifier name
+]
+
+{ #category : #testing }
 KLossFunction class >> writePython3On: str [
 	self pythonClass writePython3On: str
 ]

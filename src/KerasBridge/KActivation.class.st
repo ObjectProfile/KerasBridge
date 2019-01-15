@@ -21,6 +21,11 @@ KActivation class >> pythonClass [
 ]
 
 { #category : #testing }
+KActivation class >> pythonClassName [
+	^ self pythonClass attributeIdentifier name
+]
+
+{ #category : #testing }
 KActivation class >> writePython3On: str [
 	self pythonClass writePython3On: str
 ]

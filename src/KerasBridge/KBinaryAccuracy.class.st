@@ -8,3 +8,8 @@ Class {
 KBinaryAccuracy class >> pythonClass [
 	^ #keras asP3GI => #metrics => #binary_accuracy
 ]
+
+{ #category : #testing }
+KBinaryAccuracy class >> pythonClassName [
+	^ self pythonClass attributeIdentifier name
+]
