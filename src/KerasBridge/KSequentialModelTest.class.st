@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+KSequentialModelTest >> testCompileModel [
+	| model |
+	model := KSequentialModel inputs: 10.
+	KCF << (model => #_is_compiled).
+	self deny: KCF send waitForValue.
+	model compileLoss: KBinaryCrossentropy optimizer: KAdam default.
+	KCF << (model => #_is_compiled).
+	self assert: KCF send waitForValue.
+]
+
+{ #category : #tests }
 KSequentialModelTest >> testEmptyModel [
 	| model |
 	model := KSequentialModel new.

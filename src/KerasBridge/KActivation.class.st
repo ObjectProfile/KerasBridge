@@ -10,6 +10,11 @@ KActivation class >> isPythonGenerable [
 	^ true
 ]
 
+{ #category : #'instance creation' }
+KActivation class >> new [
+	self error: 'Activation functions are not supposed to be instantiated for Sequential Models'
+]
+
 { #category : #testing }
 KActivation class >> pythonClass [
 	self subclassResponsibility

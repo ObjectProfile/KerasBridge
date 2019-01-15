@@ -5,6 +5,11 @@ Class {
 	#category : #'KerasBridge-LossFunction'
 }
 
+{ #category : #'instance creation' }
+KLossFunction class >> new [
+	self error: 'Loss functions are not supposed to be instantiated'
+]
+
 { #category : #testing }
 KLossFunction class >> pythonClass [
 	self subclassResponsibility

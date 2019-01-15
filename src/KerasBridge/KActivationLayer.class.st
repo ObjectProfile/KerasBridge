@@ -8,9 +8,9 @@ Class {
 }
 
 { #category : #accessing }
-KActivationLayer class >> activation: activationFunction [
+KActivationLayer class >> activation: activationFunctionClass [
 	^ self new
-		activation: activationFunction;
+		activation: activationFunctionClass;
 		createObject
 ]
 
@@ -20,8 +20,9 @@ KActivationLayer >> activation [
 ]
 
 { #category : #accessing }
-KActivationLayer >> activation: anObject [
-	activation := anObject
+KActivationLayer >> activation: activationFunctionClass [
+	self assert: activationFunctionClass isClass.
+	activation := activationFunctionClass
 ]
 
 { #category : #'as yet unclassified' }
