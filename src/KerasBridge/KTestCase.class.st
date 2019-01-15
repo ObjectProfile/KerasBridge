@@ -10,9 +10,13 @@ KTestCase class >> appResource [
 ]
 
 { #category : #asserting }
-KTestCase >> assertClass: cls name: aName [
-	KCF << (cls => #__name__).
-	self assert: KCF send waitForValue equals: aName
+KTestCase >> application [
+	^ Keras uniqueInstance
+]
+
+{ #category : #asserting }
+KTestCase >> cf [
+	^ KCF
 ]
 
 { #category : #running }

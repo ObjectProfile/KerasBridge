@@ -40,7 +40,7 @@ KSequentialModelTest >> testInputLayer [
 KSequentialModelTest >> testTrainModel [
 	| model history |
 	model := KSequentialModel inputs: 2.
-	model add: (KDenseLayer neurons: 1).
+	model addLayer: (KDenseLayer neurons: 1).
 	model compileLoss: KBinaryCrossentropy optimizer: KAdam default.
 	history := (model fit: #((0 1)) labels: #((0.5)) epochs: 3) waitForValue.
 	self assert: history class equals: KTrainingHistory.

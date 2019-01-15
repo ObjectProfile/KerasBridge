@@ -29,11 +29,28 @@ KModel >> compileLoss: aLossFunction optimizer: anOptimizer metrics: arrayOfMetr
 ]
 
 { #category : #compiling }
+KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
+	^ self fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: 1
+]
+
+{ #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: batchSize [
 	| trainDataBinding trainLabelsBinding |
-	trainDataBinding := PBBinding wrap: trainData.
-	trainLabelsBinding := PBBinding wrap: trainLabels.
-	
+	trainDataBinding := KCF addBinding: (PBBinding wrap: trainData).
+	trainLabelsBinding := KCF addBinding: (PBBinding wrap: trainLabels).
+	KCF << ((
+		self => #fit 
+			callWith: (Array 
+					with: (KNumpyArray on: trainDataBinding)
+					with: (KNumpyArray on: trainLabelsBinding))
+			with: (Array 
+					with: #verbose -> 0
+					with: #batch_size -> batchSize
+					with: #epochs -> numberOfEpochs
+					with: #callbacks -> #()) asDictionary) 
+			=> #history).
+		KCF transformBlock: [ :history | KTrainingHistory model: self history: history ].
+		^ KCF send
 ]
 
 { #category : #accessing }

@@ -1,6 +1,8 @@
 Class {
 	#name : #KNumpyArray,
 	#superclass : #Object,
+	#traits : 'P3GAttributeAccess',
+	#classTraits : 'P3GAttributeAccess classTrait',
 	#instVars : [
 		'seqCollection'
 	],
