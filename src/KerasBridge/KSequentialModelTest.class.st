@@ -35,3 +35,14 @@ KSequentialModelTest >> testInputLayer [
 		assert: KCF send waitForValue
 		equals: 1
 ]
+
+{ #category : #tests }
+KSequentialModelTest >> testTrainModel [
+	| model history |
+	model := KSequentialModel inputs: 2.
+	model add: (KDenseLayer neurons: 1).
+	model compileLoss: KBinaryCrossentropy optimizer: KAdam default.
+	history := (model fit: #((0 1)) labels: #((0.5)) epochs: 3) waitForValue.
+	self assert: history class equals: KTrainingHistory.
+	self assert: history loss size equals: 3
+]

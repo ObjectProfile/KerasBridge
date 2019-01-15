@@ -5,12 +5,6 @@ Class {
 }
 
 { #category : #asserting }
-KLossFunctionClassTest >> assertClass: cls name: aName [
-	KCF << (cls => #__name__).
-	self assert: KCF send waitForValue equals: aName
-]
-
-{ #category : #asserting }
 KLossFunctionClassTest >> testBinaryCrossentropy [
 	self assertClass: KBinaryCrossentropy name: 'binary_crossentropy'
 ]

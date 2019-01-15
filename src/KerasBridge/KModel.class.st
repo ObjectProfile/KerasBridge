@@ -28,6 +28,14 @@ KModel >> compileLoss: aLossFunction optimizer: anOptimizer metrics: arrayOfMetr
 	KCF send
 ]
 
+{ #category : #compiling }
+KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: batchSize [
+	| trainDataBinding trainLabelsBinding |
+	trainDataBinding := PBBinding wrap: trainData.
+	trainLabelsBinding := PBBinding wrap: trainLabels.
+	
+]
+
 { #category : #accessing }
 KModel >> lossFunction [
 	^ lossFunction

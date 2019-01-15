@@ -4,12 +4,6 @@ Class {
 	#category : #'KerasBridge-Tests'
 }
 
-{ #category : #asserting }
-KMetricClassTest >> assertClass: cls name: aName [
-	KCF << (cls => #__name__).
-	self assert: KCF send waitForValue equals: aName
-]
-
 { #category : #tests }
 KMetricClassTest >> testBinaryAccuracy [
 	self assertClass: KBinaryAccuracy name: 'binary_accuracy'

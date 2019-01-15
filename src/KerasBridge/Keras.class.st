@@ -11,7 +11,7 @@ Keras >> commandFactory [
 
 { #category : #accessing }
 Keras >> postInitialization [
+	KCF << (#numpy asP3GI import).
 	KCF << (#keras asP3GI import).
-	KCF << 1.
 	KCF send.
 ]
