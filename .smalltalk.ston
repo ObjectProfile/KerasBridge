@@ -1,0 +1,15 @@
+SmalltalkCISpec {
+  #loading : [
+    SCIMetacelloLoadSpec {
+      #baseline : 'KerasBridge',
+      #directory : 'src',
+      #platforms : [ #pharo ]
+    }
+  ],
+  
+  #testing : {
+  	 #categories : [ 'KerasBridg*'
+ ],
+  	 #defaultTimeout : 120
+   	}
+}

@@ -1,2 +1,3 @@
-.venv
-PythonBridge
+/.venv
+/PythonBridge
+/Pipfile.lock
