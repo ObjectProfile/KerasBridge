@@ -29,6 +29,26 @@ KModel >> compileLoss: aLossFunction optimizer: anOptimizer metrics: arrayOfMetr
 ]
 
 { #category : #compiling }
+KModel >> evaluate: inputs labels: labels [
+	^ self evaluate: inputs labels: labels batchSize: 1
+]
+
+{ #category : #compiling }
+KModel >> evaluate: inputs labels: labels batchSize: batchSize [
+	| inputsBinding labelsBinding |
+	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
+	labelsBinding := KCF addBinding: (PBBinding wrap: labels).
+	KCF << (
+		self => #evaluate 
+			callWith: (Array 
+					with: (KNumpyArray on: inputsBinding)
+					with: (KNumpyArray on: labelsBinding))
+			with: (Array 
+					with: #batch_size -> batchSize) asDictionary) .
+	^ KCF send
+]
+
+{ #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
 	^ self fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: 1
 ]
@@ -66,4 +86,31 @@ KModel >> metrics [
 { #category : #accessing }
 KModel >> optimizer [
 	^ optimizer
+]
+
+{ #category : #compiling }
+KModel >> predict: inputs [
+	^ self predict: inputs transformBlock: #yourself
+]
+
+{ #category : #compiling }
+KModel >> predict: inputs transformBlock: aBlock [
+	| inputsBinding |
+	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
+	KCF << ((
+		self => #predict 
+			callWith: (Array with: (KNumpyArray on: inputsBinding))
+			with: (Array with: #batch_size -> 64) asDictionary) => #tolist callWith: #()).
+	KCF transformBlock: aBlock.
+	^ KCF send
+]
+
+{ #category : #compiling }
+KModel >> predictSingleValue: input [
+	^ self predictSingleValue: input transformBlock: #yourself
+]
+
+{ #category : #compiling }
+KModel >> predictSingleValue: input transformBlock: aBlock [
+	^ self predict: (Array with: input) transformBlock: aBlock
 ]
