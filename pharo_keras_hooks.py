@@ -1,4 +1,4 @@
-from PythonBridge import pharo_hooks
+from PythonBridge import bridge_hooks
 import keras
 
 class Pharo_Fit_Notifier(keras.callbacks.Callback):
