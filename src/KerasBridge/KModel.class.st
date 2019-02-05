@@ -28,6 +28,20 @@ KModel >> compileLoss: aLossFunction optimizer: anOptimizer metrics: arrayOfMetr
 	KCF send
 ]
 
+{ #category : #utilities }
+KModel >> createProgressBarForEpochs: numberOfEpochs withSemaphore: fitSemaphore [
+	| job |
+	job := [ :j | 
+		j
+			title: 'Training model (Epochs)';
+			min: 0;
+			max: numberOfEpochs.
+		World doOneCycle.
+		fitSemaphore wait ] asJob.
+	[ job run ] fork.
+	^ job
+]
+
 { #category : #compiling }
 KModel >> evaluate: inputs labels: labels [
 	^ self evaluate: inputs labels: labels batchSize: 1
@@ -55,9 +69,13 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
 
 { #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: batchSize [
-	| trainDataBinding trainLabelsBinding |
+	| trainDataBinding trainLabelsBinding observer callback progressBar fitSemaphore |
 	trainDataBinding := KCF addBinding: (PBBinding wrap: trainData).
 	trainLabelsBinding := KCF addBinding: (PBBinding wrap: trainLabels).
+	fitSemaphore := Semaphore new.
+	progressBar := self createProgressBarForEpochs: numberOfEpochs withSemaphore: fitSemaphore.
+	observer := KCF observerFromCallback: [ progressBar increment. World doOneCycle ].
+	callback := #pharo_keras_hooks asP3GI => #Pharo_Fit_Notifier callWith: (Array with: observer).
 	KCF << ((
 		self => #fit 
 			callWith: (Array 
@@ -67,9 +85,11 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 					with: #verbose -> 0
 					with: #batch_size -> batchSize
 					with: #epochs -> numberOfEpochs
-					with: #callbacks -> #()) asDictionary) 
+					with: #callbacks -> (Array with: callback)) asDictionary) 
 			=> #history).
-		KCF transformBlock: [ :history | KTrainingHistory model: self history: history ].
+		KCF transformBlock: [ :history | 
+			fitSemaphore signal.
+			KTrainingHistory model: self history: history ].
 		^ KCF send
 ]
 
