@@ -20,6 +20,11 @@ KActivation class >> pythonClassName [
 	^ self pythonClass attributeIdentifier name
 ]
 
+{ #category : #functional }
+KActivation class >> tensor: aTensor [
+	^ self new tensor: aTensor
+]
+
 { #category : #testing }
 KActivation class >> writePython3On: str [
 	self pythonClass writePython3On: str
@@ -30,9 +35,18 @@ KActivation >> createPythonTensorExpression: inputTensor [
 	^ (self class callWith: (Array with: inputTensor))
 ]
 
+{ #category : #testing }
+KActivation >> isBuilt [
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 KActivation >> pythonClass [
 	^ self class pythonClass
+]
+
+{ #category : #testing }
+KActivation >> setBuilt [
 ]
 
 { #category : #'as yet unclassified' }

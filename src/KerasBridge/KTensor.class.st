@@ -13,8 +13,9 @@ KTensor >> model [
 ]
 
 { #category : #accessing }
-KTensor >> model: anObject [
-	model := anObject
+KTensor >> model: aModel [
+	aModel setBuilt.
+	model := aModel
 ]
 
 { #category : #'as yet unclassified' }

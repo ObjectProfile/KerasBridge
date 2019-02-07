@@ -93,6 +93,11 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 		^ KCF send
 ]
 
+{ #category : #initialization }
+KModel >> isBuilt [
+	^ true
+]
+
 { #category : #accessing }
 KModel >> lossFunction [
 	^ lossFunction
@@ -133,6 +138,11 @@ KModel >> predictSingleValue: input [
 { #category : #compiling }
 KModel >> predictSingleValue: input transformBlock: aBlock [
 	^ self predict: (Array with: input) transformBlock: aBlock
+]
+
+{ #category : #initialization }
+KModel >> setBuilt [
+	
 ]
 
 { #category : #functional }

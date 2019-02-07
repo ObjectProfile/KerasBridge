@@ -17,6 +17,7 @@ KSequentialModel class >> inputs: aNumberOfInputs [
 
 { #category : #adding }
 KSequentialModel >> addLayer: aLayer [
+	aLayer setBuilt.
 	layers add: aLayer.
 	KCF << (self => #add callWith: (Array with: aLayer))
 ]

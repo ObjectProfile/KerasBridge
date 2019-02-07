@@ -16,6 +16,15 @@ KTensorTest >> inputTensor [
 ]
 
 { #category : #tests }
+KTensorTest >> testActivationClassTensor [
+	| tensor |
+	tensor := KSoftmax tensor: self inputTensor.
+	self assertInstanceClass: tensor name: 'Tensor'.
+	self assert: tensor model class equals: KSoftmax.
+	self assertTensor: tensor shape: #(nil 3)
+]
+
+{ #category : #tests }
 KTensorTest >> testActivationEluTensor [
 	| tensor activation |
 	activation := KElu alpha: 0.8.
