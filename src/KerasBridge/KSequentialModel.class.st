@@ -1,8 +1,6 @@
 Class {
 	#name : #KSequentialModel,
 	#superclass : #KModel,
-	#traits : 'P3GAttributeAccess',
-	#classTraits : 'P3GAttributeAccess classTrait',
 	#instVars : [
 		'layers'
 	],

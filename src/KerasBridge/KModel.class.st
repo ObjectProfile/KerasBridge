@@ -134,3 +134,15 @@ KModel >> predictSingleValue: input [
 KModel >> predictSingleValue: input transformBlock: aBlock [
 	^ self predict: (Array with: input) transformBlock: aBlock
 ]
+
+{ #category : #functional }
+KModel >> tensor: aTensor [
+	^ KSimpleTensor model: self tensor: aTensor
+]
+
+{ #category : #functional }
+KModel >> tensors: aCollectionOfTensors [
+	^ aCollectionOfTensors size = 1
+		ifTrue: [ self tensor: aCollectionOfTensors first ]
+		ifFalse: [ KMergeTensor model: self tensors: aCollectionOfTensors ]
+]

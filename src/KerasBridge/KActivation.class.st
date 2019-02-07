@@ -1,6 +1,6 @@
 Class {
 	#name : #KActivation,
-	#superclass : #KObject,
+	#superclass : #Object,
 	#classTraits : 'PBPythonValueTrait + P3GCallable',
 	#category : #'KerasBridge-Activations'
 }
@@ -8,11 +8,6 @@ Class {
 { #category : #testing }
 KActivation class >> isPythonGenerable [
 	^ true
-]
-
-{ #category : #'instance creation' }
-KActivation class >> new [
-	self error: 'Activation functions are not supposed to be instantiated for Sequential Models'
 ]
 
 { #category : #testing }
@@ -31,6 +26,16 @@ KActivation class >> writePython3On: str [
 ]
 
 { #category : #'as yet unclassified' }
+KActivation >> createPythonTensorExpression: inputTensor [
+	^ (self class callWith: (Array with: inputTensor))
+]
+
+{ #category : #'as yet unclassified' }
 KActivation >> pythonClass [
 	^ self class pythonClass
+]
+
+{ #category : #'as yet unclassified' }
+KActivation >> tensor: aTensor [
+	^ KSimpleTensor model: self tensor: aTensor
 ]
