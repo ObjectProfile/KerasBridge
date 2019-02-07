@@ -3,14 +3,17 @@ Class {
 	#superclass : #KLayer,
 	#instVars : [
 		'numberOfNeurons',
-		'activation'
+		'activation',
+		'kernelInitializer'
 	],
 	#category : #'KerasBridge-Layers'
 }
 
 { #category : #'as yet unclassified' }
 KDenseLayer class >> neurons: number [
-	^ self neurons: number activation: nil
+	^ self new
+		numberOfNeurons: number;
+		ensureCreateObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -18,7 +21,16 @@ KDenseLayer class >> neurons: number activation: activation [
 	^ self new
 		numberOfNeurons: number;
 		activation: activation;
-		createObject
+		ensureCreateObject
+]
+
+{ #category : #'as yet unclassified' }
+KDenseLayer class >> neurons: number activation: activation kernelInitializer: kernelInitializer [
+	^ self new
+		numberOfNeurons: number;
+		activation: activation;
+		kernelInitializer: kernelInitializer;
+		ensureCreateObject
 ]
 
 { #category : #'as yet unclassified' }
@@ -41,6 +53,16 @@ KDenseLayer >> createObject [
 	self 
 		basicCreateObjectArgs: (Array with: numberOfNeurons)
 		nameArgs: (Array with: #activation -> activation ) asDictionary
+]
+
+{ #category : #accessing }
+KDenseLayer >> kernelInitializer [
+	^ kernelInitializer
+]
+
+{ #category : #accessing }
+KDenseLayer >> kernelInitializer: anObject [
+	kernelInitializer := anObject
 ]
 
 { #category : #accessing }

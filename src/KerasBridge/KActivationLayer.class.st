@@ -11,7 +11,7 @@ Class {
 KActivationLayer class >> activation: activationFunctionClass [
 	^ self new
 		activation: activationFunctionClass;
-		createObject
+		ensureCreateObject
 ]
 
 { #category : #accessing }

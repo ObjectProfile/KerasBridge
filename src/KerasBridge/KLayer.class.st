@@ -21,12 +21,12 @@ KLayer >> initialize [
 ]
 
 { #category : #accessing }
-KLayer >> isBuilt [
+KLayer >> isImmutable [
 	^ isBuilt
 ]
 
 { #category : #accessing }
-KLayer >> setBuilt [
+KLayer >> setImmutable [
 	isBuilt := true
 ]
 

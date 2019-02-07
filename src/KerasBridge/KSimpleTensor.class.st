@@ -12,7 +12,7 @@ KSimpleTensor class >> model: aLayerModelOrActivation tensor: prevTensor [
 	^ self new
 		model: aLayerModelOrActivation;
 		previousTensor: prevTensor;
-		createObject
+		ensureCreateObject
 ]
 
 { #category : #'as yet unclassified' }

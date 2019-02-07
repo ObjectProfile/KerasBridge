@@ -16,7 +16,7 @@ KInputTensor class >> numberOfInputs: aNumberOfInputs [
 KInputTensor class >> shape: anArrayOfIntegers [
 	^ self new
 		shape: anArrayOfIntegers;
-		createObject
+		ensureCreateObject
 ]
 
 { #category : #'as yet unclassified' }

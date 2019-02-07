@@ -18,19 +18,19 @@ KLayersTest >> testActivationLayer [
 KLayersTest >> testBuiltBySequencialModel [
 	| layer model |
 	layer := KDenseLayer neurons: 10.
-	self deny: layer isBuilt.
+	self deny: layer isImmutable.
 	model := KSequentialModel inputs: 2.
 	model addLayer: layer.
-	self assert: layer isBuilt
+	self assert: layer isImmutable
 ]
 
 { #category : #tests }
 KLayersTest >> testBuiltByTensor [
 	| layer |
 	layer := KDenseLayer neurons: 10.
-	self deny: layer isBuilt.
+	self deny: layer isImmutable.
 	layer tensor: (KInputTensor shape: #(3)).
-	self assert: layer isBuilt
+	self assert: layer isImmutable
 ]
 
 { #category : #tests }
@@ -65,5 +65,5 @@ KLayersTest >> testDenseLayerWithActivation [
 KLayersTest >> testNotBuilt [
 	| layer |
 	layer := KDenseLayer neurons: 10.
-	self deny: layer isBuilt
+	self deny: layer isImmutable
 ]

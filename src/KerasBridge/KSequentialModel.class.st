@@ -10,14 +10,14 @@ Class {
 { #category : #accessing }
 KSequentialModel class >> inputs: aNumberOfInputs [
 	^ self new 
-		createObject;
+		ensureCreateObject;
 		addLayer: (KInputLayer numberOfInputs: aNumberOfInputs);
 		yourself
 ]
 
 { #category : #adding }
 KSequentialModel >> addLayer: aLayer [
-	aLayer setBuilt.
+	aLayer setImmutable.
 	layers add: aLayer.
 	KCF << (self => #add callWith: (Array with: aLayer))
 ]

@@ -11,7 +11,7 @@ Class {
 KInputLayer class >> inputShape: inputShape [
 	^ self new
 		inputShape: inputShape;
-		createObject
+		ensureCreateObject
 ]
 
 { #category : #'as yet unclassified' }

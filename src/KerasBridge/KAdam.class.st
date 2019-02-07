@@ -14,7 +14,7 @@ Class {
 
 { #category : #accessing }
 KAdam class >> default [
-	^ self new createObject
+	^ self new ensureCreateObject
 ]
 
 { #category : #accessing }
@@ -22,7 +22,7 @@ KAdam class >> learningRate: aPositiveFloat [
 	"Look at object initialize to know the range of the values"
 	^ self new
 			learningRate: aPositiveFloat;
-			createObject
+			ensureCreateObject
 ]
 
 { #category : #accessing }
@@ -47,7 +47,7 @@ KAdam class >> learningRate: aPositiveFloat beta_1: beta_1 beta_2: beta_2 epsilo
 			epsilon: epsilon;
 			decay: decay;
 			amsgrad: boolean;
-			createObject
+			ensureCreateObject
 ]
 
 { #category : #accessing }

@@ -19,7 +19,7 @@ KSequentialModelTest >> testCompileModel [
 KSequentialModelTest >> testEmptyModel [
 	| model |
 	model := KSequentialModel new.
-	model createObject.
+	model ensureCreateObject.
 	KCF << (#len asP3GI callWith: (Array with: model pythonVariable => #_layers)).
 	self
 		assert: KCF send waitForValue

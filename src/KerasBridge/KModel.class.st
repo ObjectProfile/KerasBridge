@@ -94,7 +94,7 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 ]
 
 { #category : #initialization }
-KModel >> isBuilt [
+KModel >> isImmutable [
 	^ true
 ]
 
@@ -141,7 +141,7 @@ KModel >> predictSingleValue: input transformBlock: aBlock [
 ]
 
 { #category : #initialization }
-KModel >> setBuilt [
+KModel >> setImmutable [
 	
 ]
 

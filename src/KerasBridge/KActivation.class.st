@@ -36,7 +36,7 @@ KActivation >> createPythonTensorExpression: inputTensor [
 ]
 
 { #category : #testing }
-KActivation >> isBuilt [
+KActivation >> isImmutable [
 	^ true
 ]
 
@@ -46,7 +46,7 @@ KActivation >> pythonClass [
 ]
 
 { #category : #testing }
-KActivation >> setBuilt [
+KActivation >> setImmutable [
 ]
 
 { #category : #'as yet unclassified' }

@@ -14,7 +14,7 @@ KTensor >> model [
 
 { #category : #accessing }
 KTensor >> model: aModel [
-	aModel setBuilt.
+	aModel setImmutable.
 	model := aModel
 ]
 
