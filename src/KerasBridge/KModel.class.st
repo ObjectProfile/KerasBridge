@@ -132,7 +132,7 @@ KModel >> predict: inputs transformBlock: aBlock [
 
 { #category : #compiling }
 KModel >> predictSingleValue: input [
-	^ self predictSingleValue: input transformBlock: #yourself
+	^ self predictSingleValue: input transformBlock: #first
 ]
 
 { #category : #compiling }

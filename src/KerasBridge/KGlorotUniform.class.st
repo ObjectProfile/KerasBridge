@@ -29,3 +29,13 @@ KGlorotUniform >> initialize [
 KGlorotUniform >> pythonClass [
 	^ #keras asP3GI => #initializers => #glorot_uniform
 ]
+
+{ #category : #accessing }
+KGlorotUniform >> seed [
+	^ seed
+]
+
+{ #category : #accessing }
+KGlorotUniform >> seed: anObject [
+	seed := anObject
+]

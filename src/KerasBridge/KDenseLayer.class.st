@@ -45,6 +45,7 @@ KDenseLayer >> activation [
 
 { #category : #accessing }
 KDenseLayer >> activation: anObject [
+	self attemptMutate: [ :cf | cf append: self => #activation <- anObject ].
 	activation := anObject
 ]
 
@@ -52,7 +53,15 @@ KDenseLayer >> activation: anObject [
 KDenseLayer >> createObject [
 	self 
 		basicCreateObjectArgs: (Array with: numberOfNeurons)
-		nameArgs: (Array with: #activation -> activation ) asDictionary
+		nameArgs: (Array 
+						with: #activation -> activation
+						with: #kernel_initializer -> kernelInitializer ) asDictionary
+]
+
+{ #category : #accessing }
+KDenseLayer >> initialize [
+	super initialize.
+	kernelInitializer := KGlorotUniform
 ]
 
 { #category : #accessing }
@@ -61,8 +70,9 @@ KDenseLayer >> kernelInitializer [
 ]
 
 { #category : #accessing }
-KDenseLayer >> kernelInitializer: anObject [
-	kernelInitializer := anObject
+KDenseLayer >> kernelInitializer: anInitializer [
+	self attemptMutate: [ :cf | cf append: self => #kernel_initializer <- anInitializer ].
+	kernelInitializer := anInitializer
 ]
 
 { #category : #accessing }
@@ -71,8 +81,9 @@ KDenseLayer >> numberOfNeurons [
 ]
 
 { #category : #accessing }
-KDenseLayer >> numberOfNeurons: anObject [
-	numberOfNeurons := anObject
+KDenseLayer >> numberOfNeurons: anInteger [
+	self attemptMutate: [ :cf | cf append: self => #units <- anInteger ].
+	numberOfNeurons := anInteger
 ]
 
 { #category : #'as yet unclassified' }

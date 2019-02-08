@@ -4,10 +4,21 @@ Class {
 	#traits : 'P3GCallable',
 	#classTraits : 'P3GCallable classTrait',
 	#instVars : [
-		'isBuilt'
+		'isImmutable'
 	],
 	#category : #'KerasBridge-Layers'
 }
+
+{ #category : #'as yet unclassified' }
+KLayer >> attemptMutate [
+	self isImmutable ifTrue: [ (KChangeOnBuiltObjectError object: self) signal ].
+]
+
+{ #category : #'as yet unclassified' }
+KLayer >> attemptMutate: aBlock [
+	self isImmutable ifTrue: [ (KChangeOnBuiltObjectError object: self) signal ].
+	self isCreated ifTrue: [ aBlock cull: KCF ]
+]
 
 { #category : #'as yet unclassified' }
 KLayer >> createPythonTensorExpression: inputTensor [
@@ -17,17 +28,17 @@ KLayer >> createPythonTensorExpression: inputTensor [
 { #category : #initialization }
 KLayer >> initialize [
 	super initialize.
-	isBuilt := false
+	isImmutable := false
 ]
 
 { #category : #accessing }
 KLayer >> isImmutable [
-	^ isBuilt
+	^ isImmutable
 ]
 
 { #category : #accessing }
 KLayer >> setImmutable [
-	isBuilt := true
+	isImmutable := true
 ]
 
 { #category : #'as yet unclassified' }

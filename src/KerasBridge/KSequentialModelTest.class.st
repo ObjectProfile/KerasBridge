@@ -37,6 +37,18 @@ KSequentialModelTest >> testInputLayer [
 ]
 
 { #category : #tests }
+KSequentialModelTest >> testPredictUntrainedModel [
+	| model |
+	model := KSequentialModel inputs: 3.
+	model addLayer: (KDenseLayer 
+								neurons: 3 
+								activation: KLinear 
+								kernelInitializer: KIdentityInitializer).
+	model compileLoss: KBinaryCrossentropy optimizer: KAdam default.
+	self assert: (model predictSingleValue: #(1 2 3)) waitForValue equals: #(1.0 2.0 3.0)
+]
+
+{ #category : #tests }
 KSequentialModelTest >> testTrainModel [
 	| model history |
 	model := KSequentialModel inputs: 2.
