@@ -55,8 +55,8 @@ KModel >> evaluate: inputs labels: labels batchSize: batchSize [
 	KCF << (
 		self => #evaluate 
 			callWith: (Array 
-					with: (KNumpyArray on: inputsBinding)
-					with: (KNumpyArray on: labelsBinding))
+					with: (self generateExpectedNumpy: inputsBinding)
+					with: (self generateExpectedNumpy: labelsBinding))
 			with: (Array 
 					with: #batch_size -> batchSize) asDictionary) .
 	^ KCF send
@@ -79,8 +79,8 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 	KCF << ((
 		self => #fit 
 			callWith: (Array 
-					with: (KNumpyArray on: trainDataBinding)
-					with: (KNumpyArray on: trainLabelsBinding))
+					with: (self generateExpectedNumpy: trainDataBinding)
+					with: (self generateExpectedNumpy: trainLabelsBinding))
 			with: (Array 
 					with: #verbose -> 0
 					with: #batch_size -> batchSize
@@ -91,6 +91,11 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 			fitSemaphore signal.
 			KTrainingHistory model: self history: history ].
 		^ KCF send
+]
+
+{ #category : #utilities }
+KModel >> generateExpectedNumpy: data [
+	^ KNumpyArray on: data
 ]
 
 { #category : #initialization }
@@ -124,7 +129,7 @@ KModel >> predict: inputs transformBlock: aBlock [
 	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
 	KCF << ((
 		self => #predict 
-			callWith: (Array with: (KNumpyArray on: inputsBinding))
+			callWith: (Array with: (self generateExpectedNumpy: inputsBinding))
 			with: (Array with: #batch_size -> 64) asDictionary) => #tolist callWith: #()).
 	KCF transformBlock: aBlock.
 	^ KCF send
