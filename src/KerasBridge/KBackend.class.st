@@ -9,6 +9,23 @@ Class {
 	#category : #'KerasBridge-Bridge'
 }
 
+{ #category : #functions }
+KBackend class >> eval: kVariable [
+	^ (self fun: #eval) callWith: (Array with: kVariable)
+]
+
+{ #category : #'instance creation' }
+KBackend class >> fun: backendName [
+	^ self new
+		backendName: backendName;
+		yourself
+]
+
+{ #category : #functions }
+KBackend class >> variable: aNumpyArray [
+	^ (self fun: #variable) callWith: (Array with: aNumpyArray)
+]
+
 { #category : #accessing }
 KBackend >> backendName [
 	^ backendName
