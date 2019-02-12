@@ -1,6 +1,8 @@
 Class {
 	#name : #KModel,
 	#superclass : #KObject,
+	#traits : 'P3GCallable',
+	#classTraits : 'P3GCallable classTrait',
 	#instVars : [
 		'optimizer',
 		'lossFunction',
@@ -40,6 +42,11 @@ KModel >> createProgressBarForEpochs: numberOfEpochs withSemaphore: fitSemaphore
 		fitSemaphore wait ] asJob.
 	[ job run ] fork.
 	^ job
+]
+
+{ #category : #functional }
+KModel >> createPythonTensorExpression: inputTensor [
+	^ (self callWith: (Array with: inputTensor))
 ]
 
 { #category : #compiling }

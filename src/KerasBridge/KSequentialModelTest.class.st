@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #tests }
+KSequentialModelTest >> testAddModelAsLayer [
+	| model seqModel |
+	seqModel := KSequentialModel inputs: 2.
+	seqModel addLayer: (KActivationLayer activation: KLinear).
+	model := KSequentialModel inputs: 2.
+	model addLayer: seqModel.
+	model compileLoss: KBinaryCrossentropy optimizer: KAdam default.
+	self assert: (model predictSingleValue: #(2 3)) waitForValue equals: #(2.0 3.0)
+]
+
+{ #category : #tests }
 KSequentialModelTest >> testCompileModel [
 	| model |
 	model := KSequentialModel inputs: 10.

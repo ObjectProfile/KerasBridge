@@ -5,6 +5,22 @@ Class {
 }
 
 { #category : #tests }
+KFunctionalModelTest >> testModelComposingModels [
+	| input seqModel model output |
+	input := KInputTensor shape: #(2).
+	seqModel := KSequentialModel inputs: 2.
+	seqModel addLayer: (KActivationLayer activation: KLinear).
+	output := seqModel tensor: input.
+	model := KFunctionalModel 
+					input: input 
+					output: output.
+	model compileLoss: KMeanSquaredError optimizer: KAdam default.
+	self 
+		assert: (model predictSingleValue: #(1 2)) waitForValue
+		equals: #(1.0 2.0)
+]
+
+{ #category : #tests }
 KFunctionalModelTest >> testSimpleModel [
 	| model input output |
 	input := KInputTensor shape: #(3).
