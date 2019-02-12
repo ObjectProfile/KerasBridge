@@ -10,7 +10,6 @@ Class {
 
 { #category : #'as yet unclassified' }
 KDotLayer class >> axes: listOfIntegers [
-	listOfIntegers size < 2 ifTrue: [ ^ self axis: listOfIntegers first ].
 	^ self new
 		axes: listOfIntegers;
 		createObject
@@ -26,17 +25,12 @@ KDotLayer class >> axes: integerOrListOfIntegers normalize: boolean [
 
 { #category : #'as yet unclassified' }
 KDotLayer class >> axis: integer [
-	^ self new
-		axes: integer;
-		createObject
+	^ self axes: (Array with: integer)
 ]
 
 { #category : #'as yet unclassified' }
 KDotLayer class >> axis: integer normalize: boolean [
-	^ self new
-		axes: integer;
-		normalize: boolean;
-		createObject
+	^ self axes: (Array with: integer) normalize: boolean
 ]
 
 { #category : #accessing }
@@ -51,8 +45,13 @@ KDotLayer >> axes: anObject [
 
 { #category : #'as yet unclassified' }
 KDotLayer >> createObject [
+	| paxes |
+	"paxes is used because Dot doesn't receive a list with a single axis. It requires a single integer for a single axis and a list of size 2 or more for multiple axes."
+	paxes :=axes size < 2 
+		ifTrue: [ axes first ]
+		ifFalse: [  axes ].
 	self 
-		basicCreateObjectArgs: (Array with: axes) 
+		basicCreateObjectArgs: (Array with: paxes) 
 		nameArgs: (Array with: #normalize -> normalize)
 ]
 
