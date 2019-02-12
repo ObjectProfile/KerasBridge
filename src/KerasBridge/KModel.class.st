@@ -95,7 +95,12 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 
 { #category : #utilities }
 KModel >> generateExpectedNumpy: data [
-	^ KNumpyArray on: data
+	self numberOfInputTensors = 1
+		ifTrue: [ ^ KNumpyArray on: data ]
+		ifFalse: [ ^ #list asP3GI 
+							callWith: (Array with: (#map asP3GI callWith: (Array 
+											with: KNumpyArray new pythonClass
+											with: data))) ]
 ]
 
 { #category : #initialization }
@@ -113,9 +118,25 @@ KModel >> metrics [
 	^ metrics
 ]
 
+{ #category : #utilities }
+KModel >> numberOfInputTensors [
+	^ 1
+]
+
 { #category : #accessing }
 KModel >> optimizer [
 	^ optimizer
+]
+
+{ #category : #utilities }
+KModel >> postProcessNumpy: expression [
+	self numberOfInputTensors = 1
+		ifTrue: [ ^ expression => #tolist callWith: #() ]
+		ifFalse: [ ^ #list asP3GI callWith: (Array with: (#map asP3GI callWith: (Array 
+							with: (PBLambda 
+										argument: #elem asP3GI 
+										expression: (#elem asP3GI => #tolist callWith: #()) )
+							with: expression))) ]
 ]
 
 { #category : #compiling }
@@ -127,22 +148,23 @@ KModel >> predict: inputs [
 KModel >> predict: inputs transformBlock: aBlock [
 	| inputsBinding |
 	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
-	KCF << ((
+	KCF << (self postProcessNumpy: (
 		self => #predict 
 			callWith: (Array with: (self generateExpectedNumpy: inputsBinding))
-			with: (Array with: #batch_size -> 64) asDictionary) => #tolist callWith: #()).
+			with: (Array with: #batch_size -> 64) asDictionary)).
 	KCF transformBlock: aBlock.
 	^ KCF send
 ]
 
 { #category : #compiling }
 KModel >> predictSingleValue: input [
-	^ self predictSingleValue: input transformBlock: #first
-]
-
-{ #category : #compiling }
-KModel >> predictSingleValue: input transformBlock: aBlock [
-	^ self predict: (Array with: input) transformBlock: aBlock
+	self numberOfInputTensors = 1
+		ifTrue: [ ^ self 
+							predict: (Array with: input) 
+							transformBlock: #first ]
+		ifFalse: [ ^ self 
+							predict: (input collect: [ :i | Array with: i ]) 
+							transformBlock: [ :arr | arr collect: #first ] ]
 ]
 
 { #category : #initialization }

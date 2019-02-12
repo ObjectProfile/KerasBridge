@@ -50,6 +50,11 @@ KFunctionalModel >> inputs: anObject [
 	inputs := anObject
 ]
 
+{ #category : #utilities }
+KFunctionalModel >> numberOfInputTensors [
+	^ self inputs size
+]
+
 { #category : #accessing }
 KFunctionalModel >> outputs [
 	^ outputs
