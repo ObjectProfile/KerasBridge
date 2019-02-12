@@ -1,10 +1,10 @@
 Class {
-	#name : #KAddLayer,
+	#name : #KAverageLayer,
 	#superclass : #KMergeLayer,
 	#category : #'KerasBridge-Layers'
 }
 
 { #category : #'as yet unclassified' }
-KAddLayer >> pythonClass [
-	^ #keras asP3GI => #layers => #Add
+KAverageLayer >> pythonClass [
+	^ #keras asP3GI => #layers => #Average
 ]

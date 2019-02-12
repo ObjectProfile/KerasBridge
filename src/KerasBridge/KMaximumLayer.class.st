@@ -1,10 +1,10 @@
 Class {
-	#name : #KAddLayer,
+	#name : #KMaximumLayer,
 	#superclass : #KMergeLayer,
 	#category : #'KerasBridge-Layers'
 }
 
 { #category : #'as yet unclassified' }
-KAddLayer >> pythonClass [
-	^ #keras asP3GI => #layers => #Add
+KMaximumLayer >> pythonClass [
+	^ #keras asP3GI => #layers => #Maximum
 ]

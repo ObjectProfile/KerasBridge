@@ -1,10 +1,10 @@
 Class {
-	#name : #KAddLayer,
+	#name : #KMultiplyLayer,
 	#superclass : #KMergeLayer,
 	#category : #'KerasBridge-Layers'
 }
 
 { #category : #'as yet unclassified' }
-KAddLayer >> pythonClass [
-	^ #keras asP3GI => #layers => #Add
+KMultiplyLayer >> pythonClass [
+	^ #keras asP3GI => #layers => #Multiply
 ]
