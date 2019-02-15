@@ -1,5 +1,5 @@
 Class {
-	#name : #KNumpyArray,
+	#name : #KVirtualNumpyArray,
 	#superclass : #Object,
 	#traits : 'P3GAttributeAccess',
 	#classTraits : 'P3GAttributeAccess classTrait',
@@ -10,38 +10,38 @@ Class {
 }
 
 { #category : #'instance creation' }
-KNumpyArray class >> on: aSequenceableCollection [
+KVirtualNumpyArray class >> on: aSequenceableCollection [
 	^ self new
 		seqCollection: aSequenceableCollection;
 		yourself
 ]
 
 { #category : #writing }
-KNumpyArray >> isPythonGenerable [
+KVirtualNumpyArray >> isPythonGenerable [
 	^ true
 ]
 
 { #category : #writing }
-KNumpyArray >> isPythonValue [
+KVirtualNumpyArray >> isPythonValue [
 	^ true
 ]
 
 { #category : #writing }
-KNumpyArray >> pythonClass [
+KVirtualNumpyArray >> pythonClass [
 	^ #numpy asP3GI => #array
 ]
 
 { #category : #accessing }
-KNumpyArray >> seqCollection [
+KVirtualNumpyArray >> seqCollection [
 	^ seqCollection
 ]
 
 { #category : #accessing }
-KNumpyArray >> seqCollection: anObject [
+KVirtualNumpyArray >> seqCollection: anObject [
 	seqCollection := anObject
 ]
 
 { #category : #writing }
-KNumpyArray >> writePython3On: aStream [
+KVirtualNumpyArray >> writePython3On: aStream [
 	(self pythonClass callWith: (Array with: seqCollection)) writePython3On: aStream
 ]

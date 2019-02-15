@@ -103,10 +103,10 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 { #category : #utilities }
 KModel >> generateExpectedNumpy: data [
 	self numberOfInputTensors = 1
-		ifTrue: [ ^ KNumpyArray on: data ]
+		ifTrue: [ ^ KVirtualNumpyArray on: data ]
 		ifFalse: [ ^ #list asP3GI 
 							callWith: (Array with: (#map asP3GI callWith: (Array 
-											with: KNumpyArray new pythonClass
+											with: KVirtualNumpyArray new pythonClass
 											with: data))) ]
 ]
 

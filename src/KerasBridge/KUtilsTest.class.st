@@ -6,5 +6,5 @@ Class {
 
 { #category : #tests }
 KUtilsTest >> testNumpyArray [
-	self assertInstanceClass: (KNumpyArray on: #(1 2 3 4)) name: 'ndarray'
+	self assertInstanceClass: (KVirtualNumpyArray on: #(1 2 3 4)) name: 'ndarray'
 ]
