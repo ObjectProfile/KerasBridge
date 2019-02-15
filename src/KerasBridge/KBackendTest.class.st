@@ -6,9 +6,8 @@ Class {
 
 { #category : #tests }
 KBackendTest >> testUseVariable [
-	| binding kvar |
-	binding := self cf bindingWrap: #((1 2)(3 4)).
-	kvar := KBackend variable: (KVirtualNumpyArray on: binding).
+	| kvar |
+	kvar := KBackend variable: (KNpArray on: #((1 2)(3 4))).
 	self cf << ((KBackend eval: kvar) => #tolist callWith: #()).
 	self 
 		assert: self cfSend waitForValue
@@ -17,9 +16,8 @@ KBackendTest >> testUseVariable [
 
 { #category : #tests }
 KBackendTest >> testUseVariableWithTensor [
-	| binding kvar layerTensor |
-	binding := self cf bindingWrap: #((-1 2)(3 -4)).
-	kvar := KBackend variable: (KVirtualNumpyArray on: binding).
+	| kvar layerTensor |
+	kvar := KBackend variable: (KNpArray on: #((-1 2)(3 -4))).
 	layerTensor := (KActivationLayer activation: KRelu) tensor: kvar.
 	self cf << ((KBackend eval: layerTensor) => #tolist callWith: #()).
 	self 

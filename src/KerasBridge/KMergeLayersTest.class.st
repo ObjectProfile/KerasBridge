@@ -56,11 +56,9 @@ KMergeLayersTest >> testSubstractLayer [
 
 { #category : #tests }
 KMergeLayersTest >> testUseAddLayer [
-	| b1 b2 kvar1 kvar2 layerTensor |
-	b1 := self cf bindingWrap: #(-1 2).
-	b2 := self cf bindingWrap: #(3 4).
-	kvar1 := KBackend variable: (KVirtualNumpyArray on: b1).
-	kvar2 := KBackend variable: (KVirtualNumpyArray on: b2).
+	| kvar1 kvar2 layerTensor |
+	kvar1 := KBackend variable: (KNpArray on: #(-1 2)).
+	kvar2 := KBackend variable: (KNpArray on: #(3 4)).
 	layerTensor := KAddLayer default tensors: (Array with: kvar1 with: kvar2).
 	self cfSend.
 	self cf << ((KBackend eval: layerTensor) => #tolist callWith: #()).

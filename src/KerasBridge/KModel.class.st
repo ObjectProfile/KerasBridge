@@ -56,14 +56,11 @@ KModel >> evaluate: inputs labels: labels [
 
 { #category : #compiling }
 KModel >> evaluate: inputs labels: labels batchSize: batchSize [
-	| inputsBinding labelsBinding |
-	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
-	labelsBinding := KCF addBinding: (PBBinding wrap: labels).
 	KCF << (
 		self => #evaluate 
 			callWith: (Array 
-					with: (self generateExpectedNumpy: inputsBinding)
-					with: (self generateExpectedNumpy: labelsBinding))
+					with: (self generateExpectedNumpy: inputs)
+					with: (self generateExpectedNumpy: labels))
 			with: (Array 
 					with: #batch_size -> batchSize) asDictionary) .
 	^ KCF send
@@ -76,9 +73,7 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
 
 { #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: batchSize [
-	| trainDataBinding trainLabelsBinding observer callback progressBar fitSemaphore |
-	trainDataBinding := KCF addBinding: (PBBinding wrap: trainData).
-	trainLabelsBinding := KCF addBinding: (PBBinding wrap: trainLabels).
+	| observer callback progressBar fitSemaphore |
 	fitSemaphore := Semaphore new.
 	progressBar := self createProgressBarForEpochs: numberOfEpochs withSemaphore: fitSemaphore.
 	observer := KCF observerFromCallback: [ progressBar increment. World doOneCycle ].
@@ -86,8 +81,8 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 	KCF << ((
 		self => #fit 
 			callWith: (Array 
-					with: (self generateExpectedNumpy: trainDataBinding)
-					with: (self generateExpectedNumpy: trainLabelsBinding))
+					with: (self generateExpectedNumpy: trainData)
+					with: (self generateExpectedNumpy: trainLabels))
 			with: (Array 
 					with: #verbose -> 0
 					with: #batch_size -> batchSize
@@ -103,11 +98,13 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: b
 { #category : #utilities }
 KModel >> generateExpectedNumpy: data [
 	self numberOfInputTensors = 1
-		ifTrue: [ ^ KVirtualNumpyArray on: data ]
-		ifFalse: [ ^ #list asP3GI 
+		ifTrue: [ ^ KNpArray on: data ]
+		ifFalse: [ | binding |
+			binding := KCF bindingWrap: data.
+			^ #list asP3GI 
 							callWith: (Array with: (#map asP3GI callWith: (Array 
-											with: KVirtualNumpyArray new pythonClass
-											with: data))) ]
+											with: #numpy asP3GI => #array
+											with: binding))) ]
 ]
 
 { #category : #initialization }
@@ -153,11 +150,9 @@ KModel >> predict: inputs [
 
 { #category : #compiling }
 KModel >> predict: inputs transformBlock: aBlock [
-	| inputsBinding |
-	inputsBinding := KCF addBinding: (PBBinding wrap: inputs).
 	KCF << (self postProcessNumpy: (
 		self => #predict 
-			callWith: (Array with: (self generateExpectedNumpy: inputsBinding))
+			callWith: (Array with: (self generateExpectedNumpy: inputs))
 			with: (Array with: #batch_size -> 64) asDictionary)).
 	KCF transformBlock: aBlock.
 	^ KCF send
