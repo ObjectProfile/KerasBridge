@@ -41,6 +41,16 @@ KNpArray >> asArray [
 ]
 
 { #category : #converting }
+KNpArray >> at: anIntegerOrCollection [
+	| expr |
+	expr := (self pythonVariable at: anIntegerOrCollection - 1).
+	anIntegerOrCollection isInteger
+		ifTrue: [ KCF << expr ]
+		ifFalse: [ KCF << (expr => #tolist callWith: #()) ].
+	^ KCF send waitForValue
+]
+
+{ #category : #converting }
 KNpArray >> contents [
 	KCF << (self => #tolist callWith: #()).
 	^ KCF send
