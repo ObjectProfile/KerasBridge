@@ -51,7 +51,7 @@ KModel >> createPythonTensorExpression: inputTensor [
 
 { #category : #compiling }
 KModel >> evaluate: inputs labels: labels [
-	^ self evaluate: inputs labels: labels batchSize: 1
+	^ self evaluate: inputs labels: labels batchSize: 32
 ]
 
 { #category : #compiling }
@@ -68,7 +68,7 @@ KModel >> evaluate: inputs labels: labels batchSize: batchSize [
 
 { #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
-	^ self fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: 1
+	^ self fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: 32
 ]
 
 { #category : #compiling }
