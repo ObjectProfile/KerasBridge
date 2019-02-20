@@ -10,6 +10,25 @@ Class {
 	#category : #'KerasBridge-Optimizers'
 }
 
+{ #category : #'as yet unclassified' }
+KSGD class >> learningRate: aPositiveFloat [
+	"Look at object initialize to know the range of the values"
+	^ self new
+			learningRate: aPositiveFloat;
+			ensureCreateObject
+]
+
+{ #category : #'as yet unclassified' }
+KSGD class >> learningRate: aPositiveFloat momentum: momentum decay: decay nesterov: boolean [
+	"Look at object initialize to know the range of the values"
+	^ self new
+			learningRate: aPositiveFloat;
+			momentum: momentum;
+			decay: decay;
+			nesterov: boolean;
+			ensureCreateObject
+]
+
 { #category : #initialization }
 KSGD >> createObject [
 	self 
