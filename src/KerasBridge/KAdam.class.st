@@ -13,11 +13,6 @@ Class {
 }
 
 { #category : #accessing }
-KAdam class >> default [
-	^ self new ensureCreateObject
-]
-
-{ #category : #accessing }
 KAdam class >> learningRate: aPositiveFloat [
 	"Look at object initialize to know the range of the values"
 	^ self new

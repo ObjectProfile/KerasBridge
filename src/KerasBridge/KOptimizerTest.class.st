@@ -11,3 +11,13 @@ KOptimizerTest >> testDefaultAdam [
 		assert: KCF send waitForValue
 		equals: 'Adam'
 ]
+
+{ #category : #tests }
+KOptimizerTest >> testDefaultRMSProp [
+	self assertInstanceClass: KRMSprop default name: 'RMSprop'
+]
+
+{ #category : #tests }
+KOptimizerTest >> testDefaultSGD [
+	self assertInstanceClass: KSGD default name: 'SGD'
+]
