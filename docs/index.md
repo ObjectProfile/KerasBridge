@@ -20,7 +20,7 @@ First, you need to install the prerequisites of [Python bridge](https://github.c
 In particular, you need Python3.6 (Python3.7 is not compatible with Tensorflow yet), Pipenv and a Pharo6.1 or newer image.
 
 Second, you need to run in your image:
-```Smalltalk
+```smalltalk
 Metacello new
     baseline: 'KerasBridge';
     repository: 'github://ObjectProfile/KerasBridge/src';
