@@ -4,7 +4,7 @@ Bridge between Pharo and Keras
 
 ## Installation
 
-First, you need to install [Kython bridge](https://github.com/ObjectProfile/PythonBridge)
+First, you need to install [Python bridge](https://github.com/ObjectProfile/PythonBridge)
 
 Second, you need to run in your image:
 ```Smalltalk
