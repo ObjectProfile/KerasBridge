@@ -27,6 +27,8 @@ markdown: kramdown
 # theme: minima
 remote_theme: pmarsceill/just-the-docs
 
+baseurl: /KerasBridge
+
 plugins:
   - jekyll-feed
 
