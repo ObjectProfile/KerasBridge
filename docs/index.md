@@ -16,7 +16,7 @@ KerasBridge gives Pharo developers the capability of using Keras neural network 
 
 ## Getting Started
 
-First, you need to install the prerequisites of [Python bridge](https://github.com/ObjectProfile/PythonBridge).
+First, you need to install Python, we recommend you to look at [Python bridge](https://objectprofile.github.io/PythonBridge/).
 In particular, you need Python3.6 (Python3.7 is not compatible with Tensorflow yet), Pipenv and a Pharo6.1 or newer image.
 
 Second, you need to run in your image:
@@ -28,7 +28,7 @@ Metacello new
 (Smalltalk at: #Keras) installPipenvEnvironment
 ```
 
-If this fails refer to the [troubleshooting section]() of the PythonBridge documentation. Though remember that the pipenv envirnoment of the KerasBridge is different from the base PythonBridge, therfore, all commands should be performed on Keras class and KerasBridge repository.
+If this fails refer to the [troubleshooting section](https://objectprofile.github.io/PythonBridge/pages/installation#troubleshooting) of the PythonBridge documentation. Though remember that the pipenv environment of the KerasBridge is different from the base PythonBridge, therfore, all commands should be performed on Keras class and KerasBridge repository.
 
 ## First neural network
 
