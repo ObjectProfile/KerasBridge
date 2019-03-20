@@ -23,7 +23,7 @@ KInputTensor class >> shape: anArrayOfIntegers [
 KInputTensor >> createObject [
 	self 
 		basicCreateObjectArgs: #() 
-		nameArgs: (Array with: #shape -> (PBTuple withAll: self shape) )
+		nameArgs: (Array with: #shape -> (P3GTuple withAll: self shape) )
 ]
 
 { #category : #'as yet unclassified' }

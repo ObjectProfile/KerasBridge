@@ -137,7 +137,7 @@ KModel >> postProcessNumpy: expression [
 	self numberOfInputTensors = 1
 		ifTrue: [ ^ expression => #tolist callWith: #() ]
 		ifFalse: [ ^ #list asP3GI callWith: (Array with: (#map asP3GI callWith: (Array 
-							with: (PBLambda 
+							with: (P3GLambda 
 										argument: #elem asP3GI 
 										expression: (#elem asP3GI => #tolist callWith: #()) )
 							with: expression))) ]
