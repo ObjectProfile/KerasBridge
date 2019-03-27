@@ -70,7 +70,7 @@ KDenseLayersTest >> testDefaultDenseLayer [
 KDenseLayersTest >> testDenseLayerWithActivation [
 	| layer |
 	layer := KDenseLayer neurons: 10 activation: KTanh.
-	KCF << (layer pythonVariable => #units).
+	KCF << (layer => #units).
 	self
 		assert: KCF send waitForValue
 		equals: 10.

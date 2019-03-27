@@ -31,7 +31,7 @@ KSequentialModelTest >> testEmptyModel [
 	| model |
 	model := KSequentialModel new.
 	model ensureCreateObject.
-	KCF << (#len asP3GI callWith: (Array with: model pythonVariable => #_layers)).
+	KCF << (#len asP3GI callWith: (Array with: model => #_layers)).
 	self
 		assert: KCF send waitForValue
 		equals: 0
@@ -41,7 +41,7 @@ KSequentialModelTest >> testEmptyModel [
 KSequentialModelTest >> testInputLayer [
 	| model |
 	model := KSequentialModel inputs: 10.
-	KCF << (#len asP3GI callWith: (Array with: model pythonVariable => #_layers)).
+	KCF << (#len asP3GI callWith: (Array with: model => #_layers)).
 	self
 		assert: KCF send waitForValue
 		equals: 1

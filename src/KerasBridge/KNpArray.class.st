@@ -6,11 +6,13 @@ Class {
 
 { #category : #'instance creation' }
 KNpArray class >> fromExpression: pyExpr [
-	| varName |
+	| varName objExpr |
 	varName := self newPythonVar.
-	KCF << (varName <- (#numpy asP3GI => #array 
+	objExpr := #numpy asP3GI => #array 
 									callWith: (Array with: pyExpr) 
-									with: (Array with: #copy -> false) asDictionary)).
+									with: (Array with: #copy -> false) asDictionary.
+	KCF << ((#registry callWith: #()) => #register_with_id 
+					callWith: (Array with: objExpr with: varName name)).
 	^ self fromPythonReference: varName
 ]
 
@@ -43,7 +45,7 @@ KNpArray >> asArray [
 { #category : #converting }
 KNpArray >> at: anIntegerOrCollection [
 	| expr |
-	expr := (self pythonVariable at: anIntegerOrCollection - 1).
+	expr := (self pythonAt: anIntegerOrCollection - 1).
 	anIntegerOrCollection isInteger
 		ifTrue: [ KCF << expr ]
 		ifFalse: [ KCF << (expr => #tolist callWith: #()) ].
@@ -64,6 +66,14 @@ KNpArray >> createObject [
 { #category : #converting }
 KNpArray >> getContents [
 	^ self contents waitForValue
+]
+
+{ #category : #converting }
+KNpArray >> pythonAt: anIntegerOrCollection [
+	^ P3GSubscription new
+		target: self;
+		insideBrackets: anIntegerOrCollection;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
