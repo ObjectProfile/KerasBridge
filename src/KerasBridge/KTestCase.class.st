@@ -10,16 +10,6 @@ KTestCase class >> appResource [
 ]
 
 { #category : #asserting }
-KTestCase >> application [
-	^ Keras uniqueInstance
-]
-
-{ #category : #asserting }
-KTestCase >> cf [
-	^ KCF
-]
-
-{ #category : #running }
-KTestCase >> setUp [
-	KCF reset
+KTestCase >> applicationClass [
+	^ Keras
 ]
