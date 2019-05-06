@@ -9,9 +9,15 @@ Class {
 
 { #category : #accessing }
 KSequentialModel class >> inputs: aNumberOfInputs [
-	^ self new 
-		ensureCreateObject;
+	^ self new
 		addLayer: (KInputLayer numberOfInputs: aNumberOfInputs);
+		yourself
+]
+
+{ #category : #accessing }
+KSequentialModel class >> new [
+	^ super new 
+		ensureCreateObject;
 		yourself
 ]
 
