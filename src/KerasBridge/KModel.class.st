@@ -1,8 +1,6 @@
 Class {
 	#name : #KModel,
 	#superclass : #KObject,
-	#traits : 'P3GCallable',
-	#classTraits : 'P3GCallable classTrait',
 	#instVars : [
 		'optimizer',
 		'lossFunction',

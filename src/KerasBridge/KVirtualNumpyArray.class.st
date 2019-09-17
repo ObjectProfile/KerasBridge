@@ -31,6 +31,11 @@ KVirtualNumpyArray >> pythonClass [
 	^ #numpy asP3GI => #array
 ]
 
+{ #category : #writing }
+KVirtualNumpyArray >> pythonConstructor [
+	^ self pythonClass
+]
+
 { #category : #accessing }
 KVirtualNumpyArray >> seqCollection [
 	^ seqCollection
@@ -43,5 +48,5 @@ KVirtualNumpyArray >> seqCollection: anObject [
 
 { #category : #writing }
 KVirtualNumpyArray >> writePython3On: aStream [
-	(self pythonClass callWith: (Array with: seqCollection)) writePython3On: aStream
+	(self pythonConstructor callWith: (Array with: seqCollection)) writePython3On: aStream
 ]

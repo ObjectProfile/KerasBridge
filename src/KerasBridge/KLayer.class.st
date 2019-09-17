@@ -1,8 +1,6 @@
 Class {
 	#name : #KLayer,
 	#superclass : #KObject,
-	#traits : 'P3GCallable',
-	#classTraits : 'P3GCallable classTrait',
 	#instVars : [
 		'isImmutable'
 	],
