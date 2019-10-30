@@ -9,6 +9,7 @@ verify_ssl = true
 
 numpy = "*"
 flask = "*"
+msgpack = "*"
 tensorflow = "*"
 keras = "*"
 
