@@ -46,7 +46,7 @@ KRMSprop >> initialize [
 	super initialize.
 	learningRate := 0.001. "float >= 0"
 	rho := 0.9. "rho >= 0"
-	epsilon := nil. "float >= 0. Fuzz factor. If nil, defaults to platform specific epsilon."
+	epsilon := KBackend callFun: #epsilon. "float >= 0. Fuzz factor."
 	decay := 0. "float >= 0. Learning rate decay over each update."
 ]
 

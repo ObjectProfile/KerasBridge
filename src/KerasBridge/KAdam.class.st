@@ -114,7 +114,7 @@ KAdam >> initialize [
 	learningRate := 0.001. "float >= 0"
 	beta_1 := 0.9. "float. 0 < beta_1 < 1. Generally close to 1."
 	beta_2 := 0.999. "float. 0 < beta_2 < 1. Generally close to 1."
-	epsilon := nil. "float >= 0. Fuzz factor. If nil, defaults to platform specific epsilon."
+	epsilon := KBackend callFun: #epsilon. "float >= 0. Fuzz factor."
 	decay := 0. "float >= 0. Learning rate decay over each update."
 	amsgrad := false. "Whenever to aply the AMSGrad variant."
 ]
