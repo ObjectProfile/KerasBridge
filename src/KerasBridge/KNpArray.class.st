@@ -6,14 +6,11 @@ Class {
 
 { #category : #'instance creation' }
 KNpArray class >> fromExpression: pyExpr [
-	| varName objExpr |
-	varName := self newPythonVar.
-	objExpr := #numpy asP3GI => #array 
-									callWith: (Array with: pyExpr) 
-									with: (Array with: #copy -> false) asDictionary.
-	KCF << ((#registry callWith: #()) => #register_with_id 
-					callWith: (Array with: objExpr with: varName name)).
-	^ self fromPythonReference: varName
+	^ super new
+			basicCreateObjectExpr: (#numpy asP3GI => #array 
+												callWith: (Array with: pyExpr) 
+												with: (Array with: #copy -> false) asDictionary);
+			yourself.
 ]
 
 { #category : #'instance creation' }
