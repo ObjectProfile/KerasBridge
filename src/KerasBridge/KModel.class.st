@@ -71,16 +71,18 @@ KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs [
 
 { #category : #compiling }
 KModel >> fit: trainData labels: trainLabels epochs: numberOfEpochs batchSize: batchSize [
-	| observer callback progressBar fitSemaphore |
+	| observer callback progressBar fitSemaphore trainNumpy testNumpy |
 	fitSemaphore := Semaphore new.
+	trainNumpy := self generateExpectedNumpy: trainData.
+	testNumpy := self generateExpectedNumpy: trainLabels.
 	progressBar := self createProgressBarForEpochs: numberOfEpochs withSemaphore: fitSemaphore.
 	observer := KCF observerFromCallback: [ progressBar increment. World doOneCycle ].
 	callback := #pharo_keras_hooks asP3GI => #Pharo_Fit_Notifier callWith: (Array with: observer).
 	KCF << ((
 		self => #fit 
 			callWith: (Array 
-					with: (self generateExpectedNumpy: trainData)
-					with: (self generateExpectedNumpy: trainLabels))
+					with: trainNumpy
+					with: testNumpy)
 			with: (Array 
 					with: #verbose -> 0
 					with: #batch_size -> batchSize
