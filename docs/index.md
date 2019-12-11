@@ -25,7 +25,6 @@ Metacello new
     baseline: 'KerasBridge';
     repository: 'github://ObjectProfile/KerasBridge/src';
     load.
-(Smalltalk at: #Keras) installPipenvEnvironment
 ```
 
 If this fails refer to the [troubleshooting section](https://objectprofile.github.io/PythonBridge/pages/installation#troubleshooting) of the PythonBridge documentation. Though remember that the pipenv environment of the KerasBridge is different from the base PythonBridge, therfore, all commands should be performed on Keras class and KerasBridge repository.
